@@ -2,29 +2,32 @@ import { createAction, createReducer, createSlice } from "@reduxjs/toolkit";
 
 let lastId = 0;
 
-// createSlice({
-//     name: bugs,
-//     initialState: [],
-//     reducers: {
-//         bugAdded: (state, action) => {
-//             state.push({
-//                 id: ++lastId,
-//                 description: action.payload.description,
-//                 resolved: false,
-//             });
-//         },
-//         bugResolved: (state, action) => {
-//             const index = state.findIndex(
-//                 (bug) => bug.id === action.payload.id
-//             );
-//             state[index].resolved = true;
-//         },
-//     },
-// });
+const slice = createSlice({
+    name: "bugs",
+    initialState: [],
+    reducers: {
+        bugAdded: (state, action) => {
+            state.push({
+                id: ++lastId,
+                description: action.payload.description,
+                resolved: false,
+            });
+        },
+        bugResolved: (state, action) => {
+            const index = state.findIndex(
+                (bug) => bug.id === action.payload.id
+            );
+            state[index].resolved = true;
+        },
+    },
+});
 
-export const bugAdded = createAction("bugAdded");
-export const bugRemoved = createAction("bugRemoved");
-export const bugResolved = createAction("bugResolved");
+export const { bugAdded, bugResolved } = slice.actions;
+export default slice.reducer;
+
+// export const bugAdded = createAction("bugAdded");
+// export const bugRemoved = createAction("bugRemoved");
+// export const bugResolved = createAction("bugResolved");
 
 // Action type
 // export const BUG_ADDED = "bugAdded";
@@ -59,48 +62,48 @@ export const bugResolved = createAction("bugResolved");
 
 // REDUCER
 
-export default createReducer([], {
-    [bugAdded.type]: (state, action) => {
-        state.push({
-            id: ++lastId,
-            description: action.payload.description,
-            resolved: false,
-        });
-    },
-    // bugRemoved: (state, action)=>{
+// export default createReducer([], {
+//     [bugAdded.type]: (state, action) => {
+//         state.push({
+//             id: ++lastId,
+//             description: action.payload.description,
+//             resolved: false,
+//         });
+//     },
+//     // bugRemoved: (state, action)=>{
 
-    // },
-    [bugResolved.type]: (state, action) => {
-        const index = state.findIndex((bug) => bug.id === action.payload.id);
-        state[index].resolved = true;
-    },
-});
+//     // },
+//     [bugResolved.type]: (state, action) => {
+//         const index = state.findIndex((bug) => bug.id === action.payload.id);
+//         state[index].resolved = true;
+//     },
+// });
 
-export function reducer(state = [], action) {
-    if (action.type === bugAdded.type) {
-        return [
-            ...state,
-            {
-                id: ++lastId,
-                description: action.payload.description,
-                resolved: false,
-            },
-        ];
-    } else if (action.type === bugRemoved.type) {
-        return state.filter((bug) => bug.id !== action.payload.id);
-    } else if (action.type === bugResolved.type) {
-        return state.map((bug) =>
-            bug.id !== action.payload.id ? bug : { ...bug, resolved: true }
-        );
+// export function reducer(state = [], action) {
+//     if (action.type === bugAdded.type) {
+//         return [
+//             ...state,
+//             {
+//                 id: ++lastId,
+//                 description: action.payload.description,
+//                 resolved: false,
+//             },
+//         ];
+//     } else if (action.type === bugRemoved.type) {
+//         return state.filter((bug) => bug.id !== action.payload.id);
+//     } else if (action.type === bugResolved.type) {
+//         return state.map((bug) =>
+//             bug.id !== action.payload.id ? bug : { ...bug, resolved: true }
+//         );
 
-        //WRONG implementation!!!
-        // const _state = [...state];
-        // const bug = state.find((s) => s.id === action.payload.id);
-        // if (!bug) return state;
-        // const index = state.indexOf(bug);
-        // _state[index].resolved = true;
-        // return _state;
-    }
+//         //WRONG implementation!!!
+//         // const _state = [...state];
+//         // const bug = state.find((s) => s.id === action.payload.id);
+//         // if (!bug) return state;
+//         // const index = state.indexOf(bug);
+//         // _state[index].resolved = true;
+//         // return _state;
+//     }
 
-    return state;
-}
+//     return state;
+// }
