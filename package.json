@@ -16,9 +16,11 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.2.5",
+    "axios": "^0.27.2",
     "immer": "^9.0.15",
     "immutable": "^4.1.0",
     "lodash": "^4.17.21",
+    "moment": "^2.29.4",
     "redux": "^4.2.0",
     "redux-devtools-extension": "^2.13.9",
     "reselect": "^4.1.6"
