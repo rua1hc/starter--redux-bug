@@ -2,10 +2,10 @@ import configureStore from "./store/configureStore";
 
 // import * as bugs from "./store/bugs";
 import {
-    bugAdded,
-    bugResolved,
-    bugAssignToUser,
-    bugReceived,
+    // bugAdded,
+    // bugResolved,
+    // bugAssignToUser,
+    // bugReceived,
     getUnresolvedBugs,
     getBugsByUser,
     loadBugs,
